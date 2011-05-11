@@ -9,6 +9,7 @@ Enable the DisplayForModel template tag
 ---------------------------------------
 
 Copy & Paste the app folder in your project
+
 Restart play (without this step, Play will not recognize the DisplayForModel tag)
 
 Usage
@@ -43,6 +44,7 @@ Model:
 	}
 	
 The @HiddenField annotation will produce a <input type="hidden" /> field.
+
 The @IgnoreField annotation will skip the field when rendering the HTML via DisplayForModel.
 
 Controller:
