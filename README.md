@@ -24,7 +24,7 @@ Model:
 	public class Member extends Model {
 		@Email
 		@MaxSize(200)
-		@Required(message = "member.bademail")
+		@Required(message = "member.wrongFormat")
 		public String email;
 
 		@HiddenField
@@ -35,9 +35,15 @@ Model:
 
 		@MaxSize(100)
 		public String lastname;
+		
+		@IgnoreField
+		@ManyToMany
+		@JoinTable(name = "MemberFriends")
+		public List<Member> friends;
 	}
 	
-The @HiddenField annotation which will produce a <input type="hidden" /> field.
+The @HiddenField annotation will produce a <input type="hidden" /> field.
+The @IgnoreField annotation will skip the field when rendering the HTML via DisplayForModel.
 
 Controller:
 

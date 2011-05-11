@@ -101,7 +101,8 @@ public class DisplayForModel extends FastTags {
 
 		for (Field field : fields) {
 
-			if (ignores == null
+			if ((ignores == null && !field
+					.isAnnotationPresent(IgnoreField.class))
 					|| (ignores != null && !ignores.contains(field.getName()))) {
 
 				String fieldName = modelName + "." + field.getName();
