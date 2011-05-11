@@ -75,18 +75,10 @@ public class DisplayForModel extends FastTags {
 			throws NullPointerException, ClassNotFoundException,
 			IllegalAccessException, NoSuchFieldException {
 
-		Model model = (Model) args.get("model");
-
-		List<String> ignores = null;
-
-		if (args.get("ignore") != null) {
-			ignores = Arrays.asList(((String) args.get("ignore")).replaceAll(
-					" ", "").split(","));
-		}
-
-		if (model == null) {
-			throw new NullPointerException("You must specify a model.");
-		}
+		// Parameters
+		Model model = getModel(args);
+		List<String> ignores = getIgnores(args);
+		Boolean editable = getEditable(args);
 
 		Class<?> clazz = model.getClass();
 
@@ -94,10 +86,6 @@ public class DisplayForModel extends FastTags {
 				.substring(clazz.getName().lastIndexOf(".") + 1).toLowerCase();
 
 		Field[] fields = clazz.getDeclaredFields();
-
-		Boolean editable = args.get("editable") == null
-				|| (args.get("editable") != null && args.get("editable")
-						.equals(true));
 
 		for (Field field : fields) {
 
@@ -282,5 +270,51 @@ public class DisplayForModel extends FastTags {
 		if (value != null) {
 			out.print(" " + name + "=\"" + value + "\"");
 		}
+	}
+
+	/**
+	 * Get the editable parameter
+	 * 
+	 * @param args
+	 * @return
+	 */
+	private static Boolean getEditable(Map<?, ?> args) {
+		return (args.get("editable") == null || (args.get("editable") != null && args
+				.get("editable").equals(true)));
+	}
+
+	/**
+	 * Get the ignores parameter
+	 * 
+	 * @param args
+	 * @return
+	 */
+	private static List<String> getIgnores(Map<?, ?> args) {
+		List<String> ignores = null;
+
+		if (args.get("ignore") != null) {
+			ignores = Arrays.asList(((String) args.get("ignore")).replaceAll(
+					" ", "").split(","));
+		}
+
+		return ignores;
+	}
+
+	/**
+	 * Get the model parameter
+	 * 
+	 * @param args
+	 * @return
+	 * @throws NullPointerException
+	 */
+	private static Model getModel(Map<?, ?> args) throws NullPointerException {
+		Model m = (Model) args.get("model");
+
+		if (m == null) {
+			throw new NullPointerException(
+					"You must specify a model. \nE.g: #{DisplayForModel model:yourModelInstance /}");
+		}
+
+		return m;
 	}
 }
