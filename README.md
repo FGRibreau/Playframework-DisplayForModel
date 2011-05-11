@@ -43,7 +43,7 @@ Model:
 		public List<Member> friends;
 	}
 	
-The @HiddenField annotation will produce a <input type="hidden" /> field.
+The @HiddenField annotation will produce a (input type="hidden") field.
 
 The @IgnoreField annotation will skip the field when rendering the HTML via DisplayForModel.
 
