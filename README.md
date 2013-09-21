@@ -1,4 +1,4 @@
-Java Play! Framework DisplayForModel 
+Java Play! Framework DisplayForModel [![Gittip](http://badgr.co/gittip/fgribreau.png)](https://www.gittip.com/fgribreau/)
 ====================================
 
 The DisplayForModel template tag returns the HTML markup for each property in the model. 
